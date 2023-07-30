@@ -7,8 +7,6 @@ import { useBookingStore } from '~/store/booking';
     const filteredBookingList = computed(()=>{
         return bookingList.filter(booking => booking.lapangan == pilihanLapangan.value)
     })
-    
-    console.log(filteredBookingList.value.length == 0);
 
 </script>
 

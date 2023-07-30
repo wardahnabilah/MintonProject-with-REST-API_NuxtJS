@@ -2,6 +2,9 @@
     import { useThemeStore }  from '~/store/theme'
 
     const theme  = useThemeStore()
+
+    // document title
+    onMounted(()=>document.title = "Minton")
     
 </script>
 <template>

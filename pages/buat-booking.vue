@@ -28,8 +28,8 @@
     <main class="min-h-screen py-32 dark:bg-primary-dark">
         <h1 class="text-2xl text-center dark:text-white font-extrabold uppercase tracking-wider">Formulir Booking</h1>
         <form @submit.prevent="addNewBooking" class="w-9/12 max-w-sm mx-auto mt-10 text-lg grid gap-6">
-            <input required pattern="[a-zA-Z\s]{3,15}" v-model="formData.namaPemesan" class="w-full rounded-2xl px-7 py-2 text-primary-dark bg-primary-light/60 dark:bg-accent-grey outline-none focus:outline-accent-yellow placeholder:text-primary-dark" type="text" placeholder="Nama Pemesan">
-            <input required pattern="[0-9]{8,12}" v-model="formData.nomorWA" class="w-full rounded-2xl px-7 py-2 text-primary-dark bg-primary-light/60 dark:bg-accent-grey outline-none focus:outline-accent-yellow placeholder:text-primary-dark" type="text" placeholder="Nomor WA">
+            <input required pattern="[a-zA-Z\s]{3,15}" v-model="formData.namaPemesan" class="w-full rounded-2xl px-7 py-2 text-primary-dark bg-primary-light/60 dark:bg-accent-grey outline-none focus:outline-accent-yellow placeholder:text-primary-dark/50" type="text" placeholder="Nama Pemesan (min 3 huruf)">
+            <input required pattern="[0-9]{8,12}" v-model="formData.nomorWA" class="w-full rounded-2xl px-7 py-2 text-primary-dark bg-primary-light/60 dark:bg-accent-grey outline-none focus:outline-accent-yellow placeholder:text-primary-dark/60" type="text" placeholder="Nomor WA (min 8 digit)">
             <div class="relative">
                 <select required v-model="formData.tanggalDipilih" class="w-full rounded-2xl px-7 py-2 text-primary-dark  bg-primary-light/60 dark:bg-accent-grey outline-none focus:outline-accent-yellow appearance-none">
                     <option value="">Pilih Tanggal</option>
