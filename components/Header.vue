@@ -3,28 +3,34 @@
 
     const isOpen = ref(false)
     const theme = useThemeStore()
+    const { currentRoute } = useRouter()
 
     // Toggle navbar
     function toggleNav() {
         isOpen.value = !isOpen.value
     }
 
+    // Close navbar when moving to another page
+    function closeNav() {
+        isOpen.value = false
+    }
+
 </script>
 
 <template>
-    <header class="py-4 fixed inset-x-0 bg-primary-light dark:bg-header-dark text-primary-dark dark:text-white">
+    <header class="py-4 fixed inset-x-0 top-0 z-50 bg-primary-light dark:bg-header-dark text-primary-dark dark:text-white">
             <div class="w-11/12 mx-auto flex justify-between items-center">
-                <NuxtLink to="">
-                    <img class="w-28" src="/assets/images/minton-logo.png" alt="Minton Logo">
+                <NuxtLink to="/">
+                    <img class="w-28 hover:cursor-pointer" src="/assets/images/minton-logo.png" alt="Minton Logo">
                 </NuxtLink>
                 <svg @click="toggleNav" class="md:hidden w-7 mb-1 fill-white hover:cursor-pointer" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 6h16v2H4zm0 5h16v2H4zm0 5h16v2H4z"></path></svg>
                 <nav :class="isOpen  ? 'max-md:top-16' : 'max-md:top-[-400%]'" class="absolute z-50 md:static left-0 duration-500 max-md:w-full bg-gradient-to-b from-primary-light from-50% to-white md:to-primary-light dark:from-header-dark dark:to-header-dark max-md:shadow-lg max-md:shadow-white/40">
                     <ul class="md:flex">
                         <li class="max-md:py-4 pl-12 max-md:border-b">
-                            <NuxtLink to="" class="hover:text-accent-yellow hover:cursor-pointer">Beranda</NuxtLink>
+                            <NuxtLink to="/" @click="closeNav" :class="currentRoute.path == '/' ? 'active' : ''" class="hover:text-accent-yellow hover:cursor-pointer">Beranda</NuxtLink>
                         </li>
                         <li class="max-md:py-4 pl-12 max-md:border-b">
-                            <NuxtLink to="" class="hover:text-accent-yellow hover:cursor-pointer">Jadwal Booking</NuxtLink>
+                            <NuxtLink to="/jadwal-booking" @click="closeNav" :class="currentRoute.path == '/jadwal-booking' ? 'active' : ''" class="hover:text-accent-yellow hover:cursor-pointer">Jadwal Booking</NuxtLink>
                         </li>
                         <li @click="theme.toggleTheme" class="flex gap-1 items-center max-md:py-4 pl-12 max-md:border-b">
                             <svg v-if="theme.isDark" class="w-5 mr-1 fill-primary-dark dark:fill-white hover:cursor-pointer" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 11.807A9.002 9.002 0 0 1 10.049 2a9.942 9.942 0 0 0-5.12 2.735c-3.905 3.905-3.905 10.237 0 14.142 3.906 3.906 10.237 3.905 14.143 0a9.946 9.946 0 0 0 2.735-5.119A9.003 9.003 0 0 1 12 11.807z"></path></svg>
@@ -33,11 +39,17 @@
                                 {{ theme.isDark ? 'Dark Mode' : 'Light Mode' }}
                             </span>
                         </li>
-                        <li class="md:hidden max-md:py-6 pl-8 max-md:border-b">
-                            <NuxtLink to="" class="px-4 py-2 rounded-full bg-primary-red shadow-lg hover:bg-primary-red-dark shadow-primary-red/40 text-white">Booking Sekarang</NuxtLink>
+                        <li v-if="currentRoute.path != '/' && currentRoute.path != '/buat-booking'" class="max-md:py-6 pl-8 max-md:border-b">
+                            <NuxtLink to="/buat-booking" @click="closeNav" class="px-4 py-2 rounded-full bg-primary-red shadow-lg hover:bg-primary-red-dark shadow-primary-red/40 text-white">Booking Sekarang</NuxtLink>
                         </li>
                     </ul>
                 </nav>
             </div>    
         </header>
 </template>
+<style scoped>
+    .active {
+        font-weight: bold;
+        color: #F0DE36;
+    }
+</style>
