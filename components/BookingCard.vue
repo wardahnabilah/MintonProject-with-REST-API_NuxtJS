@@ -4,7 +4,7 @@
 </script>
 
 <template>
-    <div class="max-w-[22rem] px-5 py-3 mx-auto mb-6 relative rounded-lg bg-accent-lightpurple shadow-lg shadow-primary-dark/25 dark:shadow-white/25">
+    <div class="max-w-[22rem] px-5 pt-3 pb-2 mx-auto mb-6 relative rounded-lg bg-accent-lightpurple shadow-lg shadow-primary-dark/25 dark:shadow-white/25">
         <div class="flex items-center justify-between gap-2 border-b-2 border-primary-dark/20">
             <h4 class="text-lg text-primary-dark font-bold">{{tanggal}}</h4>
             <svg class="bi bi-clock-fill fill-accent-darkgrey/80" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
@@ -12,8 +12,10 @@
             </svg>
             <h4 class="text-lg text-primary-dark font-bold">{{jam}}</h4>
         </div>
-        <p class="text-primary-dark">Dibooking oleh: {{nama}}</p>
-        <p class="absolute right-3 bottom-0 text-3xl text-primary-red-dark font-bold uppercase">{{ lapangan }}</p>
-
+        <div class="flex items-center gap-3">
+            <p class="text-3xl text-accent-darkerpurple font-bold uppercase">{{ lapangan }}</p>
+            <p class="text-primary-dark">Dibooking oleh: {{nama}}</p>
+            <svg class=" ml-auto fill-red-900 hover:cursor-pointer hover:fill-red-600" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24"><path d="M6 7H5v13a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7H6zm10.618-3L15 2H9L7.382 4H3v2h18V4z"></path></svg>
+        </div>
     </div>
 </template>
