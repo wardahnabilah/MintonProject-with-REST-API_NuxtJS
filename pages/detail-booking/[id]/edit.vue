@@ -1,13 +1,39 @@
 <script setup>
+    import axios from 'axios'
+
     const route = useRoute()
+    const bookingId = route.params.id
+    const config = useRuntimeConfig()
+    const formData = ref({})
     
-    const formData = reactive({
-        namaPemesan: 'User',
-        nomorWA: '081234567',
-        tanggalBooking: 'Minggu, 6 Agustus 2023',
-        jamBooking: '08:00 - 09:00',
-        lapangan: 'a'
+    // Fetch the booking from API
+    async function getABooking(id) {
+        try {
+            const response = await axios.get(`${config.public.BOOKINGS_API}/${id}`)
+            formData.value = response.data
+        } catch(err) {
+            console.log(err);
+        }
+    }
+
+    onMounted(()=> {
+        getABooking(bookingId)
     })
+
+    // Save updated booking
+    async function saveEditedBooking() {
+        try {
+            const response = await axios.patch(`${config.public.BOOKINGS_API}/${bookingId}`, formData.value)
+        } catch(err) {
+            console.log(err);
+        }
+    }
+
+    function editNewBooking() {
+        saveEditedBooking()
+
+        navigateTo(`/detail-booking/${route.params.id}`)
+    }
 
 </script>
 
@@ -47,7 +73,7 @@
                     <label for="lapangan-a">Lapangan B</label>
                 </div>
             </div>
-            <NuxtLink :to="`/detail-booking/${route.params.id}`" class="block w-full mt-6 px-4 py-2 text-white text-lg text-center rounded-full bg-primary-red shadow-lg hover:cursor-pointer hover:bg-primary-red-dark shadow-primary-red/40">Simpan</NuxtLink>
+            <button :to="`/detail-booking/${route.params.id}`" class="block w-full mt-6 px-4 py-2 text-white text-lg text-center rounded-full bg-primary-red shadow-lg hover:cursor-pointer hover:bg-primary-red-dark shadow-primary-red/40">Simpan</button>
         </form>
     </main>
 </template>
