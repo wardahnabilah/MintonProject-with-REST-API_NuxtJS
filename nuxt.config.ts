@@ -11,4 +11,9 @@ export default defineNuxtConfig({
       autoprefixer: {},
     },
   },
+  runtimeConfig: {
+    public: {
+      BOOKINGS_API: process.env.BOOKINGS_API
+    }
+  }
 })

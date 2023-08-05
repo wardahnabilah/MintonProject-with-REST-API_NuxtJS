@@ -1,11 +1,24 @@
 <script setup>
-import { useBookingStore } from '~/store/booking';
-
-    const { bookingList } = useBookingStore()
+    import axios from 'axios'
+    
+    const config = useRuntimeConfig()
+    const bookingList = ref([])
     const pilihanLapangan = ref('a')
 
+    // Fetch all bookings from API
+    async function getAllBookings() {
+        try {
+            const response = await axios.get(config.public.BOOKINGS_API)
+            bookingList.value = response.data
+        } catch(err) {
+            console.log(err)
+        }
+    }
+
+    onMounted(getAllBookings)
+
     const filteredBookingList = computed(()=>{
-        return bookingList.filter(booking => booking.lapangan == pilihanLapangan.value)
+        return bookingList.value.filter(booking => booking.lapangan == pilihanLapangan.value)
     })
 
 </script>
@@ -22,8 +35,8 @@ import { useBookingStore } from '~/store/booking';
         <div v-for="booking in filteredBookingList" class="w-9/12 max-w-lg mx-auto">
             <BookingCard
                 :nama="booking.namaPemesan"
-                :tanggal="booking.tanggalDipilih"
-                :jam="booking.jamDipilih"
+                :tanggal="booking.tanggalBooking"
+                :jam="booking.jamBooking"
                 :lapangan="booking.lapangan" />
         </div>
     </main>  
