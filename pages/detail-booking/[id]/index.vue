@@ -27,29 +27,35 @@
         <div class="w-10/12 max-w-[34rem] mx-auto rounded-3xl p-12 border-4 border-primary-light/40 dark:border-white/25 text-lg">
             <client-only>
                 <table>
-                    <tr>
+                    <tr class="pb-2">
                         <td class="pb-2 pr-2">Kode Booking</td>
-                        <td><span class="pr-2">:</span> #{{detailBooking._id}}</td>
+                        <td class="pb-2 pr-2">:</td>
+                        <td class="break-all pb-2 pr-2 "> #{{detailBooking._id}}</td>
                     </tr>
                     <tr>
                         <td class="pb-2 pr-2">Nama Pemesan</td>
-                        <td><span class="pr-2">:</span>{{detailBooking.namaPemesan}}</td>
+                        <td class="pb-2 pr-2">:</td>
+                        <td class="pb-2 pr-2">{{detailBooking.namaPemesan}}</td>
                     </tr>
                     <tr>
                         <td class="pb-2 pr-2">Nomor WA</td>
-                        <td><span class="pr-2">:</span>{{detailBooking.nomorWA}}</td>
+                        <td class="pb-2 pr-2">:</td>
+                        <td class="pb-2 pr-2">{{detailBooking.nomorWA}}</td>
                     </tr>
                     <tr>
                         <td class="pb-2 pr-2">Tanggal</td>
-                        <td><span class="pr-2">:</span>{{detailBooking.tanggalBooking}}</td>
+                        <td class="pb-2 pr-2">:</td>
+                        <td class="pb-2 pr-2">{{detailBooking.tanggalBooking}}</td>
                     </tr>
                     <tr>
                         <td class="pb-2 pr-2">Jam</td>
-                        <td><span class="pr-2">:</span>{{detailBooking.jamBooking}}</td>
+                        <td class="pb-2 pr-2">:</td>
+                        <td class="pb-2 pr-2">{{detailBooking.jamBooking}}</td>
                     </tr>
                     <tr>
                         <td class="pb-2 pr-2">Lapangan</td>
-                        <td class="uppercase"><span class="pr-2">:</span>{{ detailBooking.lapangan }}</td>
+                        <td class="pb-2 pr-2">:</td>
+                        <td class="uppercase pb-2 pr-2">{{ detailBooking.lapangan }}</td>
                     </tr>
                 </table>
             </client-only>
