@@ -1,6 +1,16 @@
 <script setup>
-    const { nama, tanggal, jam, lapangan } = defineProps(['nama', 'tanggal', 'jam', 'lapangan'])
-    
+    import axios from 'axios'
+
+    const config = useRuntimeConfig()
+    const { id, nama, tanggal, jam, lapangan, getBookingList } = defineProps(['id', 'nama', 'tanggal', 'jam', 'lapangan', 'getBookingList'])
+
+    async function deleteBooking(id) {
+        try {
+            const response = await axios.delete(`${config.public.BOOKINGS_API}/${id}`)
+        } catch(err) {
+            console.log(err)
+        }
+    }
 </script>
 
 <template>
@@ -15,7 +25,7 @@
         <div class="flex items-center gap-3">
             <p class="text-3xl text-accent-darkerpurple font-bold uppercase">{{ lapangan }}</p>
             <p class="text-primary-dark">Dibooking oleh: {{nama}}</p>
-            <svg class=" ml-auto fill-red-900 hover:cursor-pointer hover:fill-red-600" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24"><path d="M6 7H5v13a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7H6zm10.618-3L15 2H9L7.382 4H3v2h18V4z"></path></svg>
+            <svg @click="()=>deleteBooking(id)" class="ml-auto fill-red-900 hover:cursor-pointer hover:fill-red-600" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24"><path d="M6 7H5v13a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7H6zm10.618-3L15 2H9L7.382 4H3v2h18V4z"></path></svg>
         </div>
     </div>
 </template>

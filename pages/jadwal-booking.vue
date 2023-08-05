@@ -17,6 +17,8 @@
 
     onMounted(getAllBookings)
 
+    watch(bookingList, getAllBookings)
+
     const filteredBookingList = computed(()=>{
         return bookingList.value.filter(booking => booking.lapangan == pilihanLapangan.value)
     })
@@ -34,10 +36,13 @@
         
         <div v-for="booking in filteredBookingList" class="w-9/12 max-w-lg mx-auto">
             <BookingCard
+                :id="booking._id"
                 :nama="booking.namaPemesan"
                 :tanggal="booking.tanggalBooking"
                 :jam="booking.jamBooking"
-                :lapangan="booking.lapangan" />
+                :lapangan="booking.lapangan"
+                :getBookingList="getAllBookings" 
+            />
         </div>
     </main>  
 </template>
