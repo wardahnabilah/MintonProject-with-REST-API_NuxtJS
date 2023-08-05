@@ -1,7 +1,8 @@
 <script setup>
-import { useBookingStore } from '~/store/booking';
+    import { useBookingStore } from '~/store/booking';
 
     const { currentBooking } = useBookingStore()
+
 </script>
 
 <template>
@@ -14,21 +15,20 @@ import { useBookingStore } from '~/store/booking';
                 <div class="flex items-start gap-2.5">
                     <p class="inline-block">Jadwal Booking</p>
                     <div class="md:flex">
-                        <p>: {{currentBooking.value.tanggalDipilih}}</p>
+                        <p>: {{currentBooking.value.tanggalBooking}}</p>
                         <p class="ml-2 flex gap-1 items-center">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clock-fill" viewBox="0 0 16 16">
                                 <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z"/>
                             </svg>
-                            {{currentBooking.value.jamDipilih}}
+                            {{currentBooking.value.jamBooking}}
                         </p>
                     </div>
                 </div>
             </div>
             <!-- Kode Booking -->
-            <p class="mb-2">Kode booking Anda:</p>
-            <div class="mb-10 py-3 text-2xl text-center border-2 border-primary-dark dark:border-white rounded-full">{{ `#${currentBooking.value.id}` }}</div>
-            <p class=" max-w-[22rem] mx-auto text-center">Tunjukkan kode booking ini kepada petugas pada saat datang ke lapangan</p>
-            <NuxtLink to="/jadwal-booking" class="block mt-12 px-4 py-2 text-white text-lg text-center rounded-full bg-primary-red shadow-lg hover:cursor-pointer hover:bg-primary-red-dark shadow-primary-red/40">Oke</NuxtLink>
+            <p class="mb-2">Kode booking:</p>
+            <div class="mb-10 py-3 text-2xl text-center border-2 border-primary-dark dark:border-white rounded-full">{{ `#${currentBooking.value._id}` }}</div>
+            <NuxtLink :to="`/detail-booking/${currentBooking.value._id}`" class="block mt-12 px-4 py-2 text-white text-lg text-center rounded-full bg-primary-red shadow-lg hover:cursor-pointer hover:bg-primary-red-dark shadow-primary-red/40">Lihat Detail Booking</NuxtLink>
         </div>
     </main>
 </template>

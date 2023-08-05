@@ -1,20 +1,31 @@
 <script setup>
     import { useBookingStore } from '~/store/booking'
+    import axios from 'axios'
 
-    const { currentBooking, addBooking } = useBookingStore()
+    const config = useRuntimeConfig()
+    const { currentBooking } = useBookingStore()
 
     const formData = reactive({
-        id: Math.round(Math.random() * 100000) + 1000000,
         namaPemesan: "",
         nomorWA: "",
-        tanggalDipilih: "",
-        jamDipilih: "",
+        tanggalBooking: "",
+        jamBooking: "",
         lapangan: ""
     })
 
+    // Store new booking in database
+    async function addBooking(formData) {
+        try {
+            const response = await axios.post(config.public.BOOKINGS_API, formData) 
+            currentBooking.value = response.data.detailBooking
+        } catch(err) {
+            console.log(err);
+        }
+    }
+
     // Add a new booking
     function addNewBooking() {
-        if(formData.namaPemesan != "" && formData.nomorWA != "" && formData.tanggalDipilih != "" && formData.jamDipilih != ""  && formData.lapangan != "" ) {
+        if(formData.namaPemesan != "" && formData.nomorWA != "" && formData.tanggalBooking != "" && formData.jamBooking != ""  && formData.lapangan != "" ) {
             addBooking(formData)
             currentBooking.value = formData
             
@@ -31,7 +42,7 @@
             <input required pattern="[a-zA-Z\s]{3,15}" v-model="formData.namaPemesan" class="w-full rounded-2xl px-7 py-2 text-primary-dark bg-primary-light/60 dark:bg-accent-grey outline-none focus:outline-accent-yellow placeholder:text-primary-dark/50" type="text" placeholder="Nama Pemesan (min 3 huruf)">
             <input required pattern="[0-9]{8,12}" v-model="formData.nomorWA" class="w-full rounded-2xl px-7 py-2 text-primary-dark bg-primary-light/60 dark:bg-accent-grey outline-none focus:outline-accent-yellow placeholder:text-primary-dark/60" type="text" placeholder="Nomor WA (min 8 digit)">
             <div class="relative">
-                <select required v-model="formData.tanggalDipilih" class="w-full rounded-2xl px-7 py-2 text-primary-dark  bg-primary-light/60 dark:bg-accent-grey outline-none focus:outline-accent-yellow appearance-none">
+                <select required v-model="formData.tanggalBooking" class="w-full rounded-2xl px-7 py-2 text-primary-dark  bg-primary-light/60 dark:bg-accent-grey outline-none focus:outline-accent-yellow appearance-none">
                     <option value="">Pilih Tanggal</option>
                     <option value="Minggu, 6 Agustus 2023">Minggu, 6 Agustus 2023</option>
                     <option value="Senin, 7 Agustus 2023">Senin, 7 Agustus 2023</option>
@@ -41,7 +52,7 @@
                 <svg class="absolute inset-y-0 right-6 -z-6 my-auto" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path d="M16.939 7.939 12 12.879l-4.939-4.94-2.122 2.122L12 17.121l7.061-7.06z"></path></svg>    
             </div>
             <div class="relative">
-                <select required v-model="formData.jamDipilih" class="w-full rounded-2xl px-7 py-2 text-primary-dark  bg-primary-light/60 dark:bg-accent-grey outline-none focus:outline-accent-yellow appearance-none">
+                <select required v-model="formData.jamBooking" class="w-full rounded-2xl px-7 py-2 text-primary-dark  bg-primary-light/60 dark:bg-accent-grey outline-none focus:outline-accent-yellow appearance-none">
                     <option value="">Pilih Jam</option>
                     <option value="08:00 - 09:00">08:00 - 09:00</option>
                     <option value="16:00 - 17:00">16:00 - 17:00</option>
